@@ -19,7 +19,12 @@
             <v-tab-item>
               <v-card flat>
                 <v-card-text>
-                  <MailerForm />
+                  <MailerForm
+                    :recipients.sync="recipients"
+                    :title.sync="title"
+                    :contentType.sync="contentType"
+                    :body.sync="body"
+                  />
                 </v-card-text>
               </v-card>
             </v-tab-item>
@@ -45,6 +50,14 @@ export default {
   components: {
     MailerForm,
     MailerReport,
+  },
+  data() {
+    return {
+      recipients: "",
+      title: "",
+      contentType: "",
+      body: "",
+    };
   },
 };
 </script>
