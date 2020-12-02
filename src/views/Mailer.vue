@@ -19,6 +19,7 @@
             <v-tab-item>
               <v-card flat>
                 <v-card-text>
+                  {{ body }}
                   <MailerForm
                     :recipients.sync="recipients"
                     :title.sync="title"
@@ -55,7 +56,7 @@ export default {
     return {
       recipients: "",
       title: "",
-      contentType: "",
+      contentType: "richText",
       body: "",
     };
   },

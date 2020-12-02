@@ -19,10 +19,14 @@
         ></v-text-field>
       </v-col>
       <v-col cols="12" sm="8">
-        <v-btn-toggle v-model="_contentType" mandatory>
-          <v-tooltip bottom v-for="item in editorOptions" :key="item.value">
+        <v-btn-toggle mandatory>
+          <v-tooltip bottom v-for="item in editorOptions" :key="item.icon">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn v-bind="attrs" v-on="on">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                @click="_contentType = item.value"
+              >
                 <v-icon> {{ item.icon }} </v-icon>
               </v-btn>
             </template>
@@ -31,14 +35,7 @@
         </v-btn-toggle>
       </v-col>
       <v-col cols="12" sm="8">
-        <v-textarea
-          v-model="_body"
-          outlined
-          label="Message Body"
-          placeholder="Message Body"
-          full-width
-          single-line
-        ></v-textarea>
+        <component :is="_contentType" :text.sync="_body" />
       </v-col>
       <v-col cols="12" sm="8">
         <v-btn left color="orange" outlined>Send</v-btn>
@@ -48,8 +45,16 @@
 </template>
 
 <script>
+import richText from "./RichTextEditor";
+import markdown from "./MarkdownEditor";
+import plainText from "./PlainTextEditor";
 export default {
   name: "MailerForm",
+  components: {
+    richText,
+    markdown,
+    plainText,
+  },
   props: {
     recipients: {
       type: String,
@@ -108,19 +113,19 @@ export default {
         {
           text: "HTML",
           icon: "mdi-microsoft-word",
-          value: "1",
+          value: "richText",
           tooltip: "Html Editor",
         },
         {
-          text: "MarkDown",
+          text: "Markdown",
           icon: "mdi-language-markdown",
-          value: "2",
+          value: "markdown",
           tooltip: "Markdown",
         },
         {
           text: "Plain Text",
           icon: "mdi-signature-text",
-          value: "3",
+          value: "plainText",
           tooltip: "Plain",
         },
       ],
