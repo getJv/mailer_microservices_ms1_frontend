@@ -1,0 +1,9 @@
+version: "3"
+services:
+  frontend:
+    container_name: mailer_frontend
+    image: getjv/ms1_frontend
+    ports:
+      - "49000:8080"
+    environment:
+      - VUE_APP_BACKEND_API=
