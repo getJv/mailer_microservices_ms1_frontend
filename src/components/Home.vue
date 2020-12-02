@@ -1,21 +1,6 @@
 <template>
   <v-container>
     <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="100"
-        />
-      </v-col>
-
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Mailer Microservices Test
-        </h1>
-      </v-col>
-
       <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-10">
           What's next?
@@ -84,25 +69,25 @@ export default {
       {
         title: "MS1-Frontend",
         text: "Developed with VueJS and Vuetify",
-        href: "",
+        url: "/mailer",
         card_image: Ms1Image,
       },
       {
         title: "MS2-Backend",
         text: "Developed with Laravel",
-        href: "",
+        url: "",
         card_image: Ms2Image,
       },
       {
         title: "MS3-Broker",
         text: "A service provider by container",
-        href: "",
+        url: "",
         card_image: Ms3Image,
       },
       {
         title: "MS4-Mailer",
         text: "a small service using pure php",
-        href: "",
+        url: "",
         card_image: Ms4Image,
       },
     ],
