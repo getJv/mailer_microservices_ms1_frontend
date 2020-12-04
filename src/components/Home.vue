@@ -58,8 +58,6 @@
 <script>
 import Ms1Image from "../assets/ms1-card.png";
 import Ms2Image from "../assets/ms2-card.png";
-import Ms3Image from "../assets/ms3-card.png";
-import Ms4Image from "../assets/ms4-card.png";
 
 export default {
   name: "Home",
@@ -77,18 +75,6 @@ export default {
         text: "Developed with Laravel",
         url: "",
         card_image: Ms2Image,
-      },
-      {
-        title: "MS3-Broker",
-        text: "A service provider by container",
-        url: "",
-        card_image: Ms3Image,
-      },
-      {
-        title: "MS4-Mailer",
-        text: "a small service using pure php",
-        url: "",
-        card_image: Ms4Image,
       },
     ],
   }),
