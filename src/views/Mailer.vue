@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import MailerForm from "../components/mailer/MailerForm";
 import MailerReport from "../components/mailer/MailerReport";
 export default {
@@ -51,6 +52,39 @@ export default {
   components: {
     MailerForm,
     MailerReport,
+  },
+  methods: {
+    async createMails(data) {
+      try {
+        this.creatingEmail = true;
+        const url_path = process.env.VUE_APP_BACKEND_URI + "/mails";
+        const res = await axios.post(url_path, data);
+        commit("addGroup", res.data);
+        commit("setAlertGroup", {
+          show: true,
+          type: "success",
+          message: `O grupo: ${res.data.data.attributes.name} foi criado.`,
+        });
+      } catch (err) {
+        let msg = err.message;
+        if (err.response.status === 422) {
+          const { title, detail, meta } = err.response.data.errors;
+          msg = `<div class='caption'>${title}</div>`;
+          msg += `<div>${detail}</div>`;
+          msg += "<ul>";
+          msg += Object.values(meta).map((item) => `<li>${item}</li>`);
+          msg += "</ul>";
+        }
+        commit("setAlertGroup", {
+          show: true,
+          type: "error",
+          message: msg,
+        });
+        console.log(err);
+      } finally {
+        commit("setSavingGroup", false);
+      }
+    },
   },
   data() {
     return {
