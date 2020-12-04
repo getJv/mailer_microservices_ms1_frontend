@@ -32,6 +32,7 @@ const actions = {
       });
     } catch (err) {
       let msg = err.message;
+      console.log(err);
       if (err.response.status === 422) {
         const { title, detail, meta } = err.response.data.errors;
         msg = `<div class='caption'>${title}</div>`;
@@ -45,7 +46,6 @@ const actions = {
         type: "error",
         message: msg,
       });
-      console.log(err);
     } finally {
       commit("setSavingMail", false);
     }
@@ -95,7 +95,7 @@ const mutations = {
     state.mails = value;
   },
   addMail(state, value) {
-    state.mails.data.push(value);
+    state.mails?.data.push(value);
   },
 };
 

@@ -23,11 +23,7 @@
         <v-btn-toggle mandatory>
           <v-tooltip bottom v-for="item in editorOptions" :key="item.icon">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                v-bind="attrs"
-                v-on="on"
-                @click="_contentType = item.value"
-              >
+              <v-btn v-bind="attrs" v-on="on" @click="contentType = item.value">
                 <v-icon> {{ item.icon }} </v-icon>
               </v-btn>
             </template>
@@ -39,7 +35,14 @@
         <component :is="contentType" :text.sync="body" />
       </v-col>
       <v-col cols="12" sm="8">
-        <v-btn left color="orange" outlined @click="save">Send</v-btn>
+        <v-btn
+          left
+          color="orange"
+          outlined
+          :loading="$store.getters.savingMail"
+          @click="save"
+          >Send it!</v-btn
+        >
       </v-col>
     </v-row>
   </v-card>
@@ -65,7 +68,7 @@ export default {
       const newMail = {
         recipients: this.recipients,
         title: this.title,
-        contentType: this.content_type,
+        content_type: this.contentType,
         body: this.body,
       };
       this.$store.dispatch("createMail", newMail);
