@@ -45,6 +45,7 @@ const actions = {
         type: "error",
         message: msg,
       });
+      console.log(err);
     } finally {
       commit("setSavingMail", false);
     }
@@ -78,7 +79,7 @@ const actions = {
 };
 
 const mutations = {
-  setAlertMails(state, value) {
+  setAlertMail(state, value) {
     state.alertMail = value;
   },
   setLoadingMails(state, value) {

@@ -1,9 +1,10 @@
 <template>
   <v-card outlined class="pa-12">
+    <alert :alert="$store.getters.alertMail" />
     <v-row align="start" justify="center">
       <v-col cols="12" sm="8">
         <v-text-field
-          v-model="_recipients"
+          v-model="recipients"
           outlined
           label="To:"
           placeholder="Recipients"
@@ -11,7 +12,7 @@
       </v-col>
       <v-col cols="12" sm="8">
         <v-text-field
-          v-model="_title"
+          v-model="title"
           outlined
           :counter="150"
           label="Title:"
@@ -35,10 +36,10 @@
         </v-btn-toggle>
       </v-col>
       <v-col cols="12" sm="8">
-        <component :is="_contentType" :text.sync="_body" />
+        <component :is="contentType" :text.sync="body" />
       </v-col>
       <v-col cols="12" sm="8">
-        <v-btn left color="orange" outlined>Send</v-btn>
+        <v-btn left color="orange" outlined @click="save">Send</v-btn>
       </v-col>
     </v-row>
   </v-card>
@@ -48,67 +49,36 @@
 import richText from "./RichTextEditor";
 import markdown from "./MarkdownEditor";
 import plainText from "./PlainTextEditor";
+import Alert from "../widgets/Alert";
 export default {
   name: "MailerForm",
   components: {
     richText,
     markdown,
     plainText,
+    Alert,
   },
-  props: {
-    recipients: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    contentType: {
-      type: String,
-      required: true,
-    },
-    body: {
-      type: String,
-      required: true,
+  methods: {
+    save() {
+      //validations goes here
+
+      const newMail = {
+        recipients: this.recipients,
+        title: this.title,
+        contentType: this.content_type,
+        body: this.body,
+      };
+      this.$store.dispatch("createMail", newMail);
     },
   },
-  computed: {
-    _recipients: {
-      get() {
-        return this.recipients;
-      },
-      set(value) {
-        this.$emit("update:recipients", value);
-      },
-    },
-    _title: {
-      get() {
-        return this.title;
-      },
-      set(value) {
-        this.$emit("update:title", value);
-      },
-    },
-    _contentType: {
-      get() {
-        return this.contentType;
-      },
-      set(value) {
-        this.$emit("update:contentType", value);
-      },
-    },
-    _body: {
-      get() {
-        return this.body;
-      },
-      set(value) {
-        this.$emit("update:body", value);
-      },
-    },
-  },
+
   data() {
     return {
+      recipients: "",
+      title: "",
+      contentType: "richText",
+      body: "",
+
       editorOptions: [
         {
           text: "HTML",
