@@ -95,7 +95,7 @@ const mutations = {
     state.mails = value;
   },
   addMail(state, value) {
-    state.mails?.data.push(value);
+    state.mails?.data.unshift(value);
   },
 };
 

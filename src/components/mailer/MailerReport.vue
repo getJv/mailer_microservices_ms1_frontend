@@ -1,38 +1,75 @@
 <template>
-  <div>MailerForm</div>
+  <div>
+    <v-data-table
+      class="elevation-1"
+      :headers="headers"
+      :items="items"
+      :search="search"
+      :loading="$store.getters.loadingMails"
+      loading-text="Loading... Please wait"
+    >
+      <template v-slot:top>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-filter"
+          label="Search"
+          class="mx-2 mb-3"
+          single-line
+          hide-details
+        ></v-text-field>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "MailerReport",
+  created() {
+    this.fetchMails();
+  },
+  data() {
+    return {
+      search: "",
+    };
+  },
+  computed: {
+    items() {
+      return this.$store.getters.mails === null
+        ? []
+        : this.$store.getters.mails.data.map((item) => {
+            return {
+              id: item.data.id,
+              title: item.data.attributes.title,
+              body: item.data.attributes.body,
+              contentType: item.data.attributes.content_type,
+              recipients: item.data.attributes.recipients,
+              status: item.data.attributes.status,
+            };
+          });
+    },
+    headers() {
+      return [
+        {
+          text: "ID",
+          value: "id",
+        },
+        {
+          text: "Recipients",
+          value: "recipients",
+        },
+        {
+          text: "Title",
+          value: "title",
+        },
+        { text: "Status", value: "Processing Status" },
+      ];
+    },
+  },
   methods: {
-    async fetchMails() {
-      try {
-        this.loadingMails = true;
-        const url_path = process.env.VUE_APP_BACKEND_URI + "/mails";
-        this.emails = await axios.postGET(url_path);
-      } catch (err) {
-        let msg = err.message;
-        if (err.response.status === 422) {
-          const { title, detail, meta } = err.response.data.errors;
-          msg = `<div class='caption'>${title}</div>`;
-          msg += `<div>${detail}</div>`;
-          msg += "<ul>";
-          msg += Object.values(meta).map((item) => `<li>${item}</li>`);
-          msg += "</ul>";
-        }
-        this.alert = {
-          show: true,
-          type: "error",
-          message: msg,
-        };
-      } finally {
-        this.loadingMails = true;
-      }
+    fetchMails() {
+      this.$store.dispatch("fetchMails");
     },
   },
 };
 </script>
-
-<style></style>
