@@ -2,7 +2,7 @@
   <v-card outlined class="pa-12">
     <alert :alert="$store.getters.alertMail" />
     <v-row align="start" justify="center">
-      <v-col cols="12" sm="8">
+      <v-col cols="12" sm="10">
         <v-text-field
           v-model="recipients"
           outlined
@@ -10,7 +10,7 @@
           placeholder="Recipients"
         ></v-text-field>
       </v-col>
-      <v-col cols="12" sm="8">
+      <v-col cols="12" sm="10">
         <v-text-field
           v-model="title"
           outlined
@@ -31,8 +31,8 @@
           </v-tooltip>
         </v-btn-toggle>
       </v-col>
-      <v-col cols="12" sm="8">
-        <component :is="contentType" :text.sync="body" />
+      <v-col cols="12" sm="10">
+        <component :is="selectedEditor" :text.sync="body" />
       </v-col>
       <v-col cols="12" sm="8">
         <v-btn
@@ -61,6 +61,14 @@ export default {
     plainText,
     Alert,
   },
+  computed: {
+    selectedEditor() {
+      const editor = this.editorsComponents.find(
+        (i) => i.key === this.contentType
+      ).component;
+      return editor;
+    },
+  },
   methods: {
     save() {
       //validations goes here
@@ -79,27 +87,41 @@ export default {
     return {
       recipients: "",
       title: "",
-      contentType: "richText",
+      contentType: "text/html",
       body: "",
 
       editorOptions: [
         {
           text: "HTML",
           icon: "mdi-microsoft-word",
-          value: "richText",
+          value: "text/html",
           tooltip: "Html Editor",
         },
         {
           text: "Markdown",
           icon: "mdi-language-markdown",
-          value: "markdown",
+          value: "text/markdown",
           tooltip: "Markdown",
         },
         {
           text: "Plain Text",
           icon: "mdi-signature-text",
-          value: "plainText",
+          value: "text/plain",
           tooltip: "Plain",
+        },
+      ],
+      editorsComponents: [
+        {
+          key: "text/html",
+          component: "richText",
+        },
+        {
+          key: "text/markdown",
+          component: "markdown",
+        },
+        {
+          key: "text/plain",
+          component: "plainText",
         },
       ],
     };

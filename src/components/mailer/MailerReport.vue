@@ -62,7 +62,7 @@ export default {
           text: "Title",
           value: "title",
         },
-        { text: "Status", value: "Processing Status" },
+        { text: "Processing Status", value: "status" },
       ];
     },
   },
