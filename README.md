@@ -6,7 +6,7 @@
   <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-livepreview">Live Preview</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#memo-licença">License</a>
 </p>
 
 <p align="center">
@@ -49,8 +49,9 @@ Mailer Distributed Systems was my takeaway code challenge. The followed requirem
 <p align="center" >
 
 Video Presentation: [Youtube Video]()
+<br/>
+<img id="gif" alt="gif preview" width="800" src=".github/preview.png" />
 
-  <img id="gif" alt="gif preview" width="800" src=".github/preview.gif" />
 </p>
 
 ## 🚀 Technologies
@@ -78,4 +79,4 @@ Video Presentation: [Youtube Video]()
 
 Project under MIT license. Visit [LICENSE](LICENSE.md) to more.
 
-<small>Fonte: la Unica 35 px - Photopea</>
+<small>Fonte: la Unica 35 px - Photopea </>
