@@ -9,12 +9,13 @@
               class="my-3"
               contain
               height="100"
+              @click="$router.push('/')"
             />
           </v-col>
 
           <v-col class="mb-4">
             <h1 class="display-2 font-weight-bold mb-3">
-              Mailer Microservices Test
+              Mailer Distributed Systems Test
             </h1>
           </v-col>
         </v-row>
