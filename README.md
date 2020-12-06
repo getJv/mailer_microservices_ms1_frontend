@@ -66,6 +66,7 @@ Video Presentation: [Youtube Video]()
 ### Backend
 
 - Docker
+- Docker Compose
 - Laravel
 - Laravel Queue
 - Redis
