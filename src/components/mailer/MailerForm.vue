@@ -3,21 +3,10 @@
     <alert :alert="$store.getters.alertMail" />
     <v-row align="start" justify="center">
       <v-col cols="12" sm="10">
-        <v-text-field
-          v-model="recipients"
-          outlined
-          label="To:"
-          placeholder="Recipients"
-        ></v-text-field>
+        <RecipientField ref="recipientfield" :value.sync="recipients" />
       </v-col>
       <v-col cols="12" sm="10">
-        <v-text-field
-          v-model="title"
-          outlined
-          :counter="150"
-          label="Title:"
-          placeholder="Message Title"
-        ></v-text-field>
+        <SubjectFormField ref="subjectField" :value.sync="subject" />
       </v-col>
       <v-col cols="12" sm="8">
         <v-btn-toggle mandatory>
@@ -49,16 +38,20 @@
 </template>
 
 <script>
-import richText from "./RichTextEditor";
-import markdown from "./MarkdownEditor";
-import plainText from "./PlainTextEditor";
 import Alert from "../widgets/Alert";
+import richText from "./MailerFormFields/RichTextEditor";
+import markdown from "./MailerFormFields/MarkdownEditor";
+import plainText from "./MailerFormFields/PlainTextEditor";
+import RecipientField from "./MailerFormFields/RecipientsField";
+import SubjectFormField from "./MailerFormFields/SubjectFormField";
 export default {
   name: "MailerForm",
   components: {
     richText,
     markdown,
     plainText,
+    RecipientField,
+    SubjectFormField,
     Alert,
   },
   computed: {
@@ -75,7 +68,7 @@ export default {
 
       const newMail = {
         recipients: this.recipients,
-        title: this.title,
+        title: this.subject,
         content_type: this.contentType,
         body: this.body,
       };
@@ -86,7 +79,7 @@ export default {
   data() {
     return {
       recipients: "",
-      title: "",
+      subject: "",
       contentType: "text/html",
       body: "",
 
