@@ -27,11 +27,16 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn color="orange" :href="ms.site_url" text>
+              <v-btn v-if="ms.self" color="orange" :to="ms.site_url" text>
+                Visit
+              </v-btn>
+              <v-btn v-else color="orange" :href="ms.site_url" text>
+                <v-icon small class="mr-2">mdi-earth</v-icon>
                 Visit
               </v-btn>
 
               <v-btn color="orange" :href="ms.repo_url" text>
+                <v-icon small class="mr-2">mdi-earth</v-icon>
                 Repository
               </v-btn>
             </v-card-actions>
@@ -66,6 +71,7 @@ export default {
         title: "MS1-Frontend",
         text: "Developed with VueJS, Vuetify, axios, vuex and vue-router",
         site_url: "/mailer",
+        self: true,
         repo_url: "https://github.com/getJv/mailer_microservices_ms1_frontend",
         card_image: Ms1Image,
       },
@@ -73,6 +79,7 @@ export default {
         title: "MS2-Backend",
         text:
           "Developed with Laravel and async queue with redis and mysql as database",
+        self: false,
         site_url: "http://localhost",
         repo_url: "https://github.com/getJv/mailer_microservices_ms2_backend",
         card_image: Ms2Image,
