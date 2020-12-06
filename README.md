@@ -50,7 +50,6 @@ Mailer Distributed Systems was my takeaway code challenge. The followed requirem
 
 Video Presentation: [Youtube Video]()
 <br/>
-<img id="gif" alt="gif preview" width="800" src=".github/preview.png" />
 
 </p>
 
@@ -79,4 +78,4 @@ Video Presentation: [Youtube Video]()
 
 Project under MIT license. Visit [LICENSE](LICENSE.md) to more.
 
-<small>Fonte: la Unica 35 px - Photopea </>
+<small>Fonte: la Unica 35 px - Photopea </small>
