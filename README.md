@@ -16,7 +16,7 @@
 </p>
 
 <p align="center" >
-  <img id="gif" alt="gif preview" width="800" src=".github/preview.gif" />
+  <img id="gif" alt="gif preview" width="800" src=".github/preview.png" />
 </p>
 
 ## 🔖 Project
