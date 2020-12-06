@@ -21,7 +21,7 @@
         </v-btn-toggle>
       </v-col>
       <v-col cols="12" sm="10">
-        <component :is="selectedEditor" :text.sync="body" />
+        <component ref="messageField" :is="selectedEditor" :value.sync="body" />
       </v-col>
       <v-col cols="12" sm="8">
         <v-btn
@@ -44,8 +44,10 @@ import markdown from "./MailerFormFields/MarkdownEditor";
 import plainText from "./MailerFormFields/PlainTextEditor";
 import RecipientField from "./MailerFormFields/RecipientsField";
 import SubjectFormField from "./MailerFormFields/SubjectFormField";
+import { validationMixin } from "vuelidate";
 export default {
   name: "MailerForm",
+  mixins: [validationMixin],
   components: {
     richText,
     markdown,
@@ -62,10 +64,18 @@ export default {
       return editor;
     },
   },
+  created() {
+    this.resetFields();
+  },
   methods: {
-    save() {
-      //validations goes here
+    isFormReadyToSend() {
+      const fields = Object.values(this.$refs);
+      fields.forEach((field) => field.$v.$touch());
+      return !fields.some((field) => field.$v.$invalid);
+    },
 
+    save() {
+      if (!this.isFormReadyToSend()) return;
       const newMail = {
         recipients: this.recipients,
         title: this.subject,
@@ -73,6 +83,15 @@ export default {
         body: this.body,
       };
       this.$store.dispatch("createMail", newMail);
+      this.resetFields();
+    },
+    resetFields() {
+      this.recipients = null;
+      this.subject = "";
+      this.contentType = "text/html";
+      this.body = "";
+      const fields = Object.values(this.$refs);
+      fields.forEach((field) => field.$v.$reset());
     },
   },
 
@@ -80,7 +99,7 @@ export default {
     return {
       recipients: "",
       subject: "",
-      contentType: "text/html",
+      contentType: "",
       body: "",
 
       editorOptions: [
