@@ -24,7 +24,8 @@
 Mailer Distributed Systems was my takeaway code challenge. The followed requirement was needed:
 
 ### Backend
-
+[Backend repo](https://github.com/getJv/mailer_microservices_ms2_backend)
+ 
 1. (done) Make sure emails are sent with a high degree of certainty. When such an external service is unavailable there should be a fallback to a secondary service.
 2. (done) There probably will be more fallbacks so this should be taken into account. Do not use the Laravel mailer but write your own implementation.
 3. (done) This microservice should be able to send an e-mail by an (JSON) API and through a CLI
@@ -37,7 +38,7 @@ Mailer Distributed Systems was my takeaway code challenge. The followed requirem
 9. (done) You’re using micro-commits
 10. (done) we will only have Docker running on our machines and should not have to install any additional software to get this micro-service running.
 
-### Backend (Bonus points)
+### Frontend (Bonus points)
 
 11. (done) Create a VueJS application which allows us to send an email (using this service)
 12. (done) which allows us to see all the emails with their status (e.g. queued, bounced,,delivered)
