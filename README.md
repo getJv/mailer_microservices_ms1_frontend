@@ -15,10 +15,6 @@
 <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=15C3D6&labelColor=000000">
 </p>
 
-<p align="center" >
-  <img id="gif" alt="gif preview" width="600" src=".github/preview.png" />
-</p>
-
 ## 🔖 Project
 
 Mailer Distributed Systems was my takeaway code challenge. The followed requirement was needed:
