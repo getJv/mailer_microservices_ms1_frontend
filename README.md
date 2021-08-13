@@ -17,7 +17,7 @@
 
 ## 🔖 Project
 
-Mailer Distributed Systems was my takeaway code challenge. The followed requirement was needed:
+Mailer Distributed Systems was my code challenge. The followed requirement was needed:
 
 ### Backend
 [Backend repo](https://github.com/getJv/mailer_microservices_ms2_backend)
